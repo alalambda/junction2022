@@ -1,0 +1,28 @@
+{
+  "name": "junction2022",
+  "version": "1.0.0",
+  "description": "Telegram bot for junction2022.",
+  "main": "index.js",
+  "scripts": {
+    "start": "micro-bot",
+    "start-watch": "nodemon micro-bot",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alalambda/junction2022.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alalambda/junction2022/issues"
+  },
+  "homepage": "https://github.com/alalambda/junction2022#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "micro-bot": "^2.5.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
