@@ -1,6 +1,7 @@
-const { Composer, Stage, Scene, session } = require('micro-bot');
+require('dotenv');
+const { Telegraf, Markup, Format } = require('telegraf');
 
-const bot = new Composer();
+const bot = new Telegraf(process.env.BOT_TOKEN);
 
 const commands = [
 ];
@@ -13,45 +14,32 @@ bot.start(({ reply }) => {
     reply(msg);
 });
 
-bot.help((ctx) => ctx.reply('Help!'));
-
-// Commands
-// bot.command('subscribe', (ctx) => Commands.subscribe(ctx.update.message.chat.id, ctx.reply));
-
-// Handlers
-
-bot.inlineQuery((query, ctx) => {
-    console.log(query);
+bot.hears('hi', (ctx) => {
+    ctx.reply('hello!');
     console.log(ctx);
-    
-    ctx.answerInlineQuery([{
-        type: 'article',
-        id: 1,
-        title: 'test title',
-        input_message_content: 'test contents',
-        photo_url: 'https://upload.wikimedia.org/wikipedia/commons/b/ba/John_Broadus_Watson.JPG'
-      }])
-})
+});
 
-// bot.hears((message, { reply, replyWithChatAction, replyWithQuiz }) => {
-//     console.log(message);
-//     if (message.toLowerCase().indexOf('stupid') != -1) {
-//         // replyWithPoll(
-//         //     'Is that a fact or opinion?',
-//         //     ['Fact', 'Opinion']
-//         // );
+bot.hears('hello', (ctx) => {
+    ctx.replyWithHTML('<b>Hello</b>. <i>How are you today?</i>', Markup.inlineKeyboard([
+        Markup.button.callback('Not bad', 'not bad'),
+        Markup.button.callback('All right', 'all right')
+    ]))
+});
 
-//         replyWithChatAction('typing').then(_ => {
+bot.action('not bad', (ctx) => {
+    ctx.editMessageText('Have a nice day 😊')
+});
 
-//             replyWithQuiz(
-//                 'Is that a fact or opinion?',
-//                 ['Fact', 'Opinion'],
-//             );
-//         });
+bot.action('all right', (ctx) => {
+    ctx.editMessageText('May happiness be with you 🙏')
+});
 
-//         return;
-//     }
-//     reply(message + ' 42');
-// });
+
+console.log('bot started!');
+
+bot.launch();
+
+process.once("SIGINT", () => bot.stop("SIGINT"));
+process.once("SIGTERM", () => bot.stop("SIGTERM"));
 
 module.exports = bot;
