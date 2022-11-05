@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "start-watch": "nodemon node index.js",
+    "watch": "nodemon node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/alalambda/junction2022#readme",
   "dependencies": {
+    "@azure/ai-text-analytics": "^5.1.0",
     "cheerio": "^1.0.0-rc.12",
     "dotenv": "^16.0.3",
     "telegraf": "^4.10.0"
